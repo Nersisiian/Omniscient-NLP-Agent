@@ -1,0 +1,26 @@
+version: '3.9'
+services:
+  backend:
+    build: .
+    container_name: omniscient_backend
+    ports:
+      - '8000:8000'
+    environment:
+      - VECTOR_DB_PATH=./db/vector_db.faiss
+      - LLM_MODEL=tiiuae/falcon-7b-instruct
+      - API_KEY=YOUR_API_KEY
+    volumes:
+      - .:/app
+    command: uvicorn api.main:app --host 0.0.0.0 --port 8000 --reload
+
+  streamlit:
+    image: python:3.11-slim
+    container_name: omniscient_dashboard
+    depends_on:
+      - backend
+    ports:
+      - '8501:8501'
+    volumes:
+      - .:/app
+    working_dir: /app
+    command: streamlit run dashboard/dashboard.py --server.port 8501 --server.address 0.0.0.0

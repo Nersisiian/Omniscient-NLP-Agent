@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+transformers
+torch
+faiss-cpu
+streamlit
+pydantic
+numpy
+pytest
+nest_asyncio
