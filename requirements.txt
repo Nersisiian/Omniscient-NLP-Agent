@@ -7,4 +7,4 @@ streamlit
 pydantic
 numpy
 pytest
-nest_asyncio
+nest_asyncio 
